@@ -7,6 +7,7 @@ services:
         environment:
             node.name: elasticsearch
             ES_JAVA_OPTS: "-Xmx512m -Xms512m"
+            discovery.type: single-node
             ELASTIC_USERNAME: elastic
             ELASTIC_PASSWORD: changeme
         ports:
