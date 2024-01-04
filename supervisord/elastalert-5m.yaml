@@ -1,6 +1,6 @@
 # The elasticsearch hostname for metadata writeback
 # Note that every rule can have its own elasticsearch host
-es_host: 192.168.68.141
+es_host: elasticsearch
 
 # The elasticsearch port
 es_port: 9200
@@ -23,7 +23,7 @@ buffer_time:
 #es_url_prefix: elasticsearch
 
 # Connect with TLS to elasticsearch
-use_ssl: True
+use_ssl: False
 
 # Verify TLS certificates
 # verify_certs: false
@@ -35,8 +35,8 @@ use_ssl: True
 #es_send_get_body_as: GET
 
 # Option basic-auth username and password for elasticsearch
-es_username: elastalert_user
-es_password: ssXbvLhMUjW6HpagWuVq
+es_username: elastic
+es_password: changeme
 
 # Use SSL authentication with client certificates client_cert must be
 # a pem file containing both cert and key for client

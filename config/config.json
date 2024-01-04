@@ -24,7 +24,7 @@
   "es_password": "changeme",
   "opensearch_flg": false,
   "opensearch2_flg": false,
-  "es_ssl": true,
+  "es_ssl": false,
   "es_ca_certs": "/opt/elastalert/certs/ca.crt",
   "es_client_cert": "/opt/elastalert/certs/kibana.crt",
   "es_client_key": "/opt/elastalert/certs/kibana.key",
