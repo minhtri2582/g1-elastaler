@@ -40,9 +40,9 @@ es_password: changeme
 
 # Use SSL authentication with client certificates client_cert must be
 # a pem file containing both cert and key for client
-ca_certs: /opt/elastalert/certs/ca.crt
-client_cert: /opt/elastalert/certs/kibana.crt
-client_key: /opt/elastalert/certs/kibana.key
+#ca_certs: /opt/elastalert/certs/ca.crt
+#client_cert: /opt/elastalert/certs/kibana.crt
+#client_key: /opt/elastalert/certs/kibana.key
 
 # The index on es_host which is used for metadata storage
 # This can be a unmapped index, but it is recommended that you run
