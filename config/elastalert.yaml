@@ -23,7 +23,7 @@ buffer_time:
 #es_url_prefix: elasticsearch
 
 # Connect with TLS to elasticsearch
-use_ssl: True
+use_ssl: False
 
 # Verify TLS certificates
 # verify_certs: false
