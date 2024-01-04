@@ -1,0 +1,19 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # - uses: actions/checkout@v3
+    - name: pull docker
+    - run: |              
+        echo "Another message or command"
+        whoami
+        pwd
+        ls -l /home/g1admin/g1-elastaler
+        cd /home/g1admin/g1-elastaler
+        git pull
