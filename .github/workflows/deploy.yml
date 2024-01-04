@@ -5,11 +5,10 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build:    
+    runs-on: self-hosted      
     steps:
-    - uses: actions/checkout@v3
-    - name: pull docker
+    - uses: actions/checkout@v3    
     - run: |              
         echo "Another message or command"
         whoami
@@ -17,3 +16,4 @@ jobs:
         ls -l /home/g1admin/g1-elastaler
         cd /home/g1admin/g1-elastaler
         git pull
+    - run: echo "One last message"
