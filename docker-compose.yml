@@ -46,6 +46,24 @@ services:
         build:
           context: .
           dockerfile: Dockerfile
+        depends_on:
+          - elasticsearch
+        volumes:
+          - type: bind
+            source: ./supervisord
+            target: /opt/elastalert/supervisord
+          - type: bind
+            source: ./config/config.json
+            target: /opt/elastalert-server/config/config.json
+          - type: bind
+            source: ./rules
+            target: /opt/elastalert/rules
+          - type: bind
+            source: ./elastalert_modules
+            target: /opt/elastalert/elastalert_modules
+          - type: bind
+            source: ./rule_templates
+            target: /opt/elastalert/rule_templates
 
 networks:
     elastic-net:
