@@ -10,6 +10,7 @@ services:
             discovery.type: single-node
             ELASTIC_USERNAME: elastic
             ELASTIC_PASSWORD: changeme
+            xpack.security.enabled: false
         ports:
             - "9200:9200"
             - "9300:9300"
