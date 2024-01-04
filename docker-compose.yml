@@ -68,6 +68,9 @@ services:
           - type: bind
             source: ./rule_templates
             target: /opt/elastalert/rule_templates
+          - type: bind
+            source: ./src
+            target: /opt/elastalert/src
 
 networks:
     elastic-net:
