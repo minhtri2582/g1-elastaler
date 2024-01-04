@@ -56,6 +56,9 @@ services:
             source: ./config/config.json
             target: /opt/elastalert-server/config/config.json
           - type: bind
+            source: ./config/supervisor.conf
+            target: /etc/supervisor/supervisor.conf
+          - type: bind
             source: ./rules
             target: /opt/elastalert/rules
           - type: bind
