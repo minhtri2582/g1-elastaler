@@ -1,19 +1,15 @@
-name: Docker Image CI
+name: deploy on dev
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 jobs:
-  build:    
+  deploy:    
     runs-on: self-hosted      
-    steps:
-    #- uses: actions/checkout@v3    
-    - run: |              
-        echo "Another message or command"
-        whoami
-        pwd
-        ls -l /home/g1admin/g1-elastaler
+    steps:    
+    - run: |                              
         cd /home/g1admin/g1-elastaler
-        git pull
-    - run: echo "One last message"
+        sudo git pull
+        sudo docker compose restart elastalert
+    
