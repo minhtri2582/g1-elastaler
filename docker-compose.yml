@@ -36,6 +36,17 @@ services:
               target: /usr/share/kibana/config/kibana.yml
         depends_on:
             - elasticsearch
+
+    elastalert:
+        container_name: elastalert
+        ports:
+          - "3030:3030"
+        networks:
+          - elastic-net
+        build:
+          context: .
+          dockerfile: Dockerfile
+
 networks:
     elastic-net:
         driver: bridge
