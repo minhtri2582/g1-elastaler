@@ -1,4 +1,4 @@
-import indexHandler from '../handlers/';
+import indexHandler from '../handlers';
 import statusHandler from '../handlers/status';
 import errorsHandler from '../handlers/status/errors';
 import rulesHandler from '../handlers/rules';

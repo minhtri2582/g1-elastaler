@@ -8,6 +8,7 @@ ENV ELASTALERT_HOME /opt/elastalert
 WORKDIR /opt
 
 RUN apk add --update --no-cache wget && \
+    apk add --update --no-cache supervisor && \
     wget -O elastalert.zip "${ELASTALERT_URL}" && \
     unzip elastalert.zip && \
     rm elastalert.zip && \
@@ -31,7 +32,8 @@ RUN apk add --update --no-cache \
     py3-wheel \
     python3 \
     python3-dev \
-    tzdata
+    tzdata \
+    supervisor
 
 COPY --from=ea2 /opt/elastalert /opt/elastalert
 
@@ -68,7 +70,8 @@ RUN apk add --update --no-cache \
     py3-pip \
     python3 \
     python3-dev \
-    tzdata
+    tzdata \
+    supervisor
 
 COPY --from=install /opt/elastalert /opt/elastalert
 COPY --from=install /home/node/.local/lib/python3.11/site-packages /home/node/.local/lib/python3.11/site-packages
@@ -87,6 +90,9 @@ COPY elastalert_modules/ /opt/elastalert/elastalert_modules
 RUN mkdir -p /opt/elastalert/rules/ /opt/elastalert/server_data/tests/ \
     && chown -R node:node /opt
 
+RUN mkdir -p /var/log/supervisord \
+    && chown -R node:node /var/log/supervisord
+    
 USER node
 
 EXPOSE 3030

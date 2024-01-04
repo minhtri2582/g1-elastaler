@@ -7,17 +7,17 @@ es_port: 9200
 
 # This is the folder that contains the rule yaml files
 # Any .yaml file will be loaded as a rule
-rules_folder: rules
+rules_folder: rules/1d_rules
 
 # How often ElastAlert will query elasticsearch
 # The unit can be anything from weeks to seconds
 run_every:
-  minutes: 1
+  days: 1
 
 # ElastAlert will buffer results from the most recent
 # period of time, in case some log sources are not in real time
 buffer_time:
-  minutes: 1
+  days: 1
 
 # Optional URL prefix for elasticsearch
 #es_url_prefix: elasticsearch

@@ -21,7 +21,7 @@ export default class TestController {
       let processOptions = [];
       let outputLines = [];
 
-      processOptions.push('-m', 'elastalert.elastalert', '--config', 'config.yaml');
+      processOptions.push('-m', 'elastalert.elastalert', '--config', 'kibana.yml');
       processOptions.push('--rule', fullPath, '--verbose', '--silence', `${unit}=${duration}`);
 
       console.log(processOptions);
@@ -44,7 +44,7 @@ export default class TestController {
             resolve(outputLines.join('\n'));
           } else {
             reject(outputLines.join('\n'));
-            logger.error(outputLines.join('\n'));  
+            logger.error(outputLines.join('\n'));
           }
         });
       } catch (error) {

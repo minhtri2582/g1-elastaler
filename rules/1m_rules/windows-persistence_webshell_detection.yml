@@ -1,0 +1,77 @@
+# Index to search, wildcard supported
+name: 'Web Shell Detection: Script Process Child of Common Web Processes'
+query_string: 'event.code : 1 AND winlog.event_data.ParentCommandLine : ("w3wp.exe" OR "httpd.exe" OR "nginx.exe" OR "php.exe" OR "php-cgi.exe" OR "tomcat.exe") and
+  winlog.event_data.CommandLine : ("cmd.exe" OR "cscript.exe" OR "powershell.exe" OR "pwsh.exe" OR "powershell_ise.exe" OR "wmic.exe" OR "wscript.exe")'
+
+# Alert on each event: Any, Blacklist, Whitelist, Change, Frequency, Spike, Flatline, NewTerm, Cardinality,...
+type: any
+
+# A list of elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+filter:
+- query:
+    query_string:
+      query: $query_string$
+
+index: g1-hq-onprem-windows-*
+
+# When the attacker continues, send a new alert after x minutes
+realert:
+  minutes: 1
+
+# Specify your services here
+alert:
+  - debug
+  - post
+
+# Alert body only cointains a title and text
+alert_text_type: alert_text_only
+
+alert_subject_args:
+  - agent.name
+  - event.provider
+alert_subject: "Attack on {0} of type Discovery by {1}"
+
+alert_text_args:
+  - host.name
+  - winlog.event_data.User
+  - winlog.event_data.CommandLine
+  - winlog.event_data.ParentCommandLine
+  - winlog.event_data.UtcTime
+alert_text: |- 
+  An attack on {0} is detected.
+  The attacker looks like:
+  User: {1}
+  Cmd: {2}
+  ParrentCmd: {3}
+  Time execute: {4}
+
+#http_post_url: "https://n8n.galaxy.one/webhook/rule-matching-handler"
+http_post_url: "https://n8n.galaxy.one/webhook-test/rule-matching-handler"
+http_post_ignore_ssl_errors: True
+http_post_payload:
+  rule_name: winlog.event_data.RuleName
+  md5: md5 
+  sha1: sha1 
+  sha256: sha256
+  username: winlog.event_data.User
+  cmd: winlog.event_data.CommandLine
+  parrentcmd: winlog.event_data.ParentCommandLine
+  created_at: winlog.event_data.UtcTime
+http_post_static_payload:
+  title: $name$
+  description: "Identifies suspicious commands executed via a web server, which may suggest a vulnerability and remote shell access."
+  type: elastalert
+  source: "GalaxyOne"
+  tags: ["Use Case: Threat Detection", "Tactic: Persistence, Initial Access, Execution"]
+  product: elastalert-g1
+  severity: 3
+  tlp: 2
+http_post_headers:
+  Elastalert-Token: __n8n_BLANK_VALUE_e5362baf-c777-4d57-a609-6eaf1f9e87f6
+
+# Enhancement for converting 'detections' array into object, ex. get merged detection type by  
+# 'detections_parsed.type' or get first detection type by 'detection_parsed.0.type' 
+match_enhancements:   
+- "elastalert_modules.thehive_handler.WindowSplitHashes"  

@@ -1,0 +1,83 @@
+# Index to search, wildcard supported
+name: 'Exchange Mailbox Export via PowerShell'
+query_string: ""
+
+# Alert on each event: Any, Blacklist, Whitelist, Change, Frequency, Spike, Flatline, NewTerm, Cardinality,...
+type: any
+
+# A list of elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+filter:
+- query:
+    query_string:
+      query: $query_string$
+
+index: bitsensor-detections-*
+
+# When the attacker continues, send a new alert after x minutes
+realert:
+  minutes: 1
+
+# Specify your services here
+alert:
+  - debug
+  # - thehive
+
+# Alert body only cointains a title and text
+alert_text_type: alert_text_only
+
+alert_subject_args:
+  - endpoint.name
+  - detections_parsed.type
+alert_subject: "Attack on <{}> of type {}"
+
+alert_text_args:
+  - endpoint.name
+  - detections_parsed.ip
+  - detections_parsed.ua
+alert_text: |-
+  Identifies the use of the Exchange PowerShell cmdlet, New-MailBoxExportRequest, to export the contents of a primary mailbox or archive to a .pst file. Adversaries may target user email to collect sensitive information.
+  An attack on {} is detected.
+  The attacker looks like:
+  IP: {}
+  User-Agent: {}
+
+# thehive config alerting
+hive_connection:
+  hive_host: http://192.168.68.144
+  hive_port: 9000
+  hive_apikey: AChKYLb5AEx40WVuZFTnoVAou5oBwm19
+
+hive_alert_config:
+  follow: True
+  severity: 2
+  status: 'New'
+  source: "GalaxyOne"
+  # source_args: [ data.source ]
+  description: "Identifies the use of the Exchange PowerShell cmdlet, New-MailBoxExportRequest, to export the contents of a primary mailbox or archive to a .pst file. Adversaries may target user email to collect sensitive information."
+  # description_args: [ name, description]
+  tags: ["OS: Windows", "Use Case: Threat Detection", "Tactic: Collection", "Resources: Investigation Guide", "Data Source: PowerShell Logs"]
+  title: $name$
+  tlp: 2
+  type: 'elastalert'
+  # type_args: [ data.type ]
+
+# hive_observable_data_mapping:
+#   - hostname: host.name
+#     tlp: 1
+#     tags: [ "OS: Linux", "Tactic: Discovery" ]
+#     message: 'agent hostname'
+#   - other: user.name
+#     tlp: 2
+#     tags: [ "OS: Linux", "Tactic: Discovery" ]
+#     message: 'User discovery"'
+#   - ip: host.ip[0]
+#     tlp: 1
+#     tags: [ "OS: Linux", "Tactic: Discovery" ]
+#     message: 'IP address'
+
+# Enhancement for converting 'detections' array into object, ex. get merged detection type by  
+# 'detections_parsed.type' or get first detection type by 'detection_parsed.0.type' 
+# match_enhancements:   
+# - "elastalert_modules.<>"   

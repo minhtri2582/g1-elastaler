@@ -64,46 +64,55 @@ export default class ProcessController {
       logger.warn('ElastAlert will start but might not be able to save its data!');
     }
 
-    let startArguments = [];
+    // let startArguments = [];
 
-    if (config.get('start') !== undefined && config.get('start') !== '') {
-      logger.info('Setting ElastAlert query beginning to time ' + config.get('start'));
-      startArguments.push('--start', config.get('start'));
-    }
+    // if (config.get('start') !== undefined && config.get('start') !== '') {
+    //   logger.info('Setting ElastAlert query beginning to time ' + config.get('start'));
+    //   startArguments.push('--start', config.get('start'));
+    // }
 
-    if (config.get('end') !== undefined && config.get('end') !== '') {
-      logger.info('Setting ElastAlert query ending to time ' + config.get('end'));
-      startArguments.push('--end', config.get('end'));
-    }
+    // if (config.get('end') !== undefined && config.get('end') !== '') {
+    //   logger.info('Setting ElastAlert query ending to time ' + config.get('end'));
+    //   startArguments.push('--end', config.get('end'));
+    // }
 
-    if (config.get('debug') === true) {
-      logger.info('Setting ElastAlert debug mode. This will increase the logging verboseness, change all alerts to DebugAlerter, which prints alerts and suppresses their normal action, and skips writing search and alert metadata back to Elasticsearch.');
-      startArguments.push('--debug');
-    }
+    // if (config.get('debug') === true) {
+    //   logger.info('Setting ElastAlert debug mode. This will increase the logging verboseness, change all alerts to DebugAlerter, which prints alerts and suppresses their normal action, and skips writing search and alert metadata back to Elasticsearch.');
+    //   startArguments.push('--debug');
+    // }
 
-    if (config.get('verbose') === true) {
-      logger.info('Setting ElastAlert verbose mode. This will increase the logging verboseness, which allows you to see information about the state of queries.');
-      startArguments.push('--verbose');
-    }
+    // if (config.get('verbose') === true) {
+    //   logger.info('Setting ElastAlert verbose mode. This will increase the logging verboseness, which allows you to see information about the state of queries.');
+    //   startArguments.push('--verbose');
+    // }
 
-    if (config.get('es_debug') === true) {
-      logger.info('Setting ElastAlert es_debug mode. This will enable logging for all queries made to Elasticsearch.');
-      startArguments.push('--es_debug');
-    }
+    // if (config.get('es_debug') === true) {
+    //   logger.info('Setting ElastAlert es_debug mode. This will enable logging for all queries made to Elasticsearch.');
+    //   startArguments.push('--es_debug');
+    // }
 
-    if (config.get('prometheus_port') !== undefined && config.get('prometheus_port') !== '') {
-      logger.info('Setting ElastAlert to expose metrics in Prometheus format on port ' + config.get('prometheus_port'));
-      startArguments.push('--prometheus_port', config.get('prometheus_port'));
-    }
+    // if (config.get('prometheus_port') !== undefined && config.get('prometheus_port') !== '') {
+    //   logger.info('Setting ElastAlert to expose metrics in Prometheus format on port ' + config.get('prometheus_port'));
+    //   startArguments.push('--prometheus_port', config.get('prometheus_port'));
+    // }
 
-    logger.info('Starting elastalert with arguments ' + (startArguments.join(' ') || '[none]'));
+    // logger.info('Starting elastalert with arguments ' + (startArguments.join(' ') || '[none]'));
 
-    this._process = spawn('python3', ['-m', 'elastalert.elastalert'].concat(startArguments), {
-      cwd: this._elastalertPath
-    });
+    // this._process = spawn('python3', ['-m', 'elastalert.elastalert'].concat(startArguments), {
+    //   cwd: this._elastalertPath
+    // });
 
-    logger.info(`Started Elastalert (PID: ${this._process.pid})`);
+    // logger.info(`Started Elastalert (PID: ${this._process.pid})`);
+    // this._status = Status.READY;
+
+
+    logger.info("Start supervisord");
+
+    this._process = spawn('/usr/bin/supervisord', ['-c', '/etc/supervisor/supervisor.conf']);
+
+    logger.info(`Started Supervisord (PID: ${this._process.pid})`);
     this._status = Status.READY;
+
 
     // Redirect stdin/stderr to logger
     this._process.stdout.on('data', (data) => {

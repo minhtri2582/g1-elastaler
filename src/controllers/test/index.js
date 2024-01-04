@@ -34,7 +34,7 @@ export default class TestController {
           let stdoutLines = [];
           let stderrLines = [];
 
-          processOptions.push('-m', 'elastalert.test_rule', '--config', 'config.yaml', tempFilePath);
+          processOptions.push('-m', 'elastalert.test_rule', '--config', 'kibana.yml', tempFilePath);
 
           if (options.start && options.end) {
             processOptions.push('--start', options.start);
@@ -79,28 +79,28 @@ export default class TestController {
                   if (err) {
                     return console.error(err);
                   }
-            
+
                   if (socket && socket.readyState === ws.OPEN) {
-                    socket.send(JSON.stringify({ 
+                    socket.send(JSON.stringify({
                       event: 'stats',
-                      data: { 
-                        cpu: percent, 
-                        mem: ((os.totalmem() - os.freemem()) / os.totalmem()) * 100, 
-                      } 
-                    }));        
+                      data: {
+                        cpu: percent,
+                        mem: ((os.totalmem() - os.freemem()) / os.totalmem()) * 100,
+                      }
+                    }));
                   }
                   else {
                     clearInterval(interval);
                   }
-    
+
                 });
               }, 1000);
-    
+
               socket.on('close', () => {
                 testProcess.kill();
               });
             }
-              
+
             testProcess.stdout.on('data', function (data) {
               if (socket && socket.readyState === ws.OPEN) {
                 // clean up output noise introduced in newer versions of elastalert
@@ -108,7 +108,7 @@ export default class TestController {
                 dataStr = dataStr.replace(/\d rules loaded\n/, '');
                 dataStr = dataStr.replace(/Didn't get any results.\n/, '');
 
-                socket.send(JSON.stringify({ 
+                socket.send(JSON.stringify({
                   event: 'result',
                   data: dataStr
                 }));
@@ -121,10 +121,10 @@ export default class TestController {
               if (socket && socket.readyState === ws.OPEN) {
                 // clean up output noise from newer version of elastalert
                 if (!data.toString().startsWith('INFO:apscheduler.scheduler:Adding job tentatively')) {
-                  socket.send(JSON.stringify({ 
+                  socket.send(JSON.stringify({
                     event: 'progress',
-                    data: data.toString() 
-                  }));  
+                    data: data.toString()
+                  }));
                 }
               }
 
@@ -142,7 +142,7 @@ export default class TestController {
               } else {
                 if (!socket) {
                   reject(stderrLines.join('\n'));
-                  logger.error(stderrLines.join('\n'));  
+                  logger.error(stderrLines.join('\n'));
                 }
               }
 

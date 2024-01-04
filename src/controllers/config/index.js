@@ -27,7 +27,7 @@ export default class ConfigController {
   }
 
   _getConfig() {
-    const path = joinPath(config.get('elastalertPath'), 'config.yaml');
+    const path = joinPath(config.get('elastalertPath'), 'kibana.yml');
     return fs.readFileSync(path);
-  } 
+  }
 }
