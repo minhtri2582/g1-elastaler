@@ -41,10 +41,12 @@ export default class RulesController {
           }).map(function(fileName) {
             return fileName.slice(0, -5);
           });
-
           delete directoryIndex.files;
-          //resolve(directoryIndex);
-          resolve({"rules": "test"});
+          Object.entries(directoryIndex).forEach(entry => {
+            directoryIndex.directories.push(entry);
+          });
+          resolve(directoryIndex);
+          //resolve({"rules": "test"});
         })
         .catch(function(error) {
 
