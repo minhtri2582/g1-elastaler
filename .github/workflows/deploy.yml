@@ -10,6 +10,7 @@ jobs:
     steps:    
     - run: |                              
         cd /home/g1admin/g1-elastaler
+        sudo git checkout .
         sudo git pull
         sudo docker compose restart elastalert
     
