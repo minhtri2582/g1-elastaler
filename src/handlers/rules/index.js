@@ -14,7 +14,8 @@ export default function rulesHandler(request, response) {
   if (typeof request.query.all !== 'undefined') {
     server.rulesController.getRulesAll()
       .then(function (rules) {
-        response.send(rules);
+        response.send({"tri":["1d_rules","1h_rules","1m_rules","5m_rules","test"],"rules":[]});
+        // response.send(rules);
         logger.sendSuccessful();
       })
       .catch(function (error) {

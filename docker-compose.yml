@@ -70,8 +70,7 @@ services:
             target: /opt/elastalert/rule_templates
           - type: bind
             source: ./src
-            target: /opt/elastalert/src
-
+            target: /opt/elastalert-server/src
 networks:
     elastic-net:
         driver: bridge
