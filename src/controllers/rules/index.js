@@ -36,7 +36,6 @@ export default class RulesController {
     return new Promise(function(resolve, reject) {
       self._fileSystemController.readDirectory(fullPath)
         .then(function(directoryIndex) {
-
           directoryIndex.rules = directoryIndex.files.filter(function(fileName) {
             return pathExtension(fileName).toLowerCase() === '.yaml';
           }).map(function(fileName) {
@@ -44,7 +43,8 @@ export default class RulesController {
           });
 
           delete directoryIndex.files;
-          resolve(directoryIndex);
+          //resolve(directoryIndex);
+          resolve({"rules": "test"});
         })
         .catch(function(error) {
 
