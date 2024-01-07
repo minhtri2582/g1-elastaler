@@ -29,59 +29,53 @@ export default class RulesController {
         });
     });
   }
-  
+   
   getRules(path) {
     const self = this;
     const fullPath = joinPath(self.rulesFolder, path);
   
-    function readDirectoryRecursive(dirPath) {
-      return self._fileSystemController.readDirectory(dirPath)
-        .then(function (directoryIndex) {
-          // Lọc tệp tin .yaml và lấy tên tệp (loại bỏ phần mở rộng)
-          directoryIndex.rules = (directoryIndex.files || []).filter(function (fileName) {
-            return pathExtension(fileName).toLowerCase() === '.yaml' || pathExtension(fileName).toLowerCase() === '.yml' 
-          }).map(function (fileName) {
-            return fileName.slice(0, -5);
-          });
+    async function readDirectoryRecursive(dirPath) {
+      try {
+        const directoryIndex = await self._fileSystemController.readDirectory(dirPath);
   
-          // Lọc thư mục và lấy tên thư mục
-          directoryIndex.subfolders = directoryIndex.directories || [];
+        // Combine files and directories into a single array
+        const allItems = [
+          ...(directoryIndex.files || []),
+          ...(directoryIndex.directories || []),
+        ];
   
-          // // Loại bỏ thông tin không cần thiết
-          delete directoryIndex.filesName;
-          // delete directoryIndex.directories;
+        // Process both files and subdirectories
+        const itemsInfo = await Promise.all(
+          allItems.map(async (item) => {
+            const itemPath = joinPath(dirPath, item);
+            const isDirectory = directoryIndex.directories && directoryIndex.directories.includes(item);
   
-          // Lặp qua các thư mục con và đọc chúng đệ quy
-          const subfolderPromises = directoryIndex.subfolders.map(function (subfolder) {
-            const subfolderPath = joinPath(dirPath, subfolder);
-            return readDirectoryRecursive(subfolderPath);
-          });
+            if (isDirectory) {
+              // Recursively process subdirectories
+              const subfolderInfo = await readDirectoryRecursive(itemPath);
   
-          // Không đọc nội dung file, chỉ lấy thông tin tên file
-          const filePromises = (directoryIndex.files || []).map(function (file) {
-            return Promise.resolve({ fileName: file, content: null });
-          });
+              // Flatten structure for subdirectory
+              return subfolderInfo;
+            } else {
+              // Process files
+              const fileName = item.replace(/\.(yaml|yml)$/, ''); // Remove .yaml or .yml extension
+              return fileName;
+            }
+          })
+        );
   
-          // Kết hợp tất cả các Promise thành một mảng duy nhất
-          return Promise.all([...subfolderPromises, ...filePromises])
-            .then(function (subfolderAndFileResults) {
-              directoryIndex.subfolderAndFileResults = subfolderAndFileResults;
-              return directoryIndex;
-            });
-        });
-    }
-  
-    return new Promise(function (resolve, reject) {
-      readDirectoryRecursive(fullPath)
-        .then(resolve)
-        .catch(function (error) {
+        return { [dirPath.split('/').pop()]: itemsInfo };
+        // return result;
+      } catch (error) {
+        return new Promise(function (resolve, reject) {
           if (normalizePath(self.rulesFolder) === fullPath) {
+            // If the root folder doesn't exist, try creating it
             fs.mkdir(fullPath, { recursive: true }, function (error) {
               if (error) {
                 reject(new RulesRootFolderNotCreatableError());
                 logger.warn(`The rules root folder (${fullPath}) couldn't be found nor could it be created by the file system.`);
               } else {
-                // Trả về thư mục gốc rỗng nếu tạo thành công
+                // Return an empty directory if created successfully
                 resolve(self._fileSystemController.getEmptyDirectoryIndex());
               }
             });
@@ -90,46 +84,16 @@ export default class RulesController {
             reject(new RulesFolderNotFoundError(path));
           }
         });
+      }
+    }
+  
+    return new Promise(function (resolve, reject) {
+      readDirectoryRecursive(fullPath)
+        .then(resolve)
+        .catch(reject);
     });
   }
   
-
-  // getRules(path) {
-  //   const self = this;
-  //   const fullPath = joinPath(self.rulesFolder, path);
-  //   return new Promise(function(resolve, reject) {
-  //     self._fileSystemController.readDirectoryCustom(fullPath)
-  //       .then(function(directoryIndex) {
-  //         directoryIndex.rules = directoryIndex.files.filter(function(fileName) {
-  //           return pathExtension(fileName).toLowerCase() === '.yaml';
-  //         }).map(function(fileName) {
-  //           return fileName.slice(0, -5);
-  //         });
-  //         delete directoryIndex.files;
-  //         resolve(directoryIndex);
-  //       })
-  //       .catch(function(error) {
-
-  //         // Check if the requested folder is the rules root folder
-  //         if (normalizePath(self.rulesFolder) === fullPath) {
-
-  //           // Try to create the root folder
-  //           fs.mkdir(fullPath, { recursive: true }, function(error) {
-  //             if (error) {
-  //               reject(new RulesRootFolderNotCreatableError());
-  //               logger.warn(`The rules root folder (${fullPath}) couldn't be found nor could it be created by the file system.`);
-  //             } else {
-  //               resolve(self._fileSystemController.getEmptyDirectoryIndex());
-  //             }
-  //           });
-  //         } else {
-  //           logger.warn(`The requested folder (${fullPath}) couldn't be found / read by the server. Error:`, error);
-  //           reject(new RulesFolderNotFoundError(path));
-  //         }
-  //       });
-  //   });
-  // }
-
   rule(id, path) {
     const self = this;
     return new Promise(function(resolve, reject) {
