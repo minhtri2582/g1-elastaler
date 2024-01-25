@@ -51,6 +51,7 @@ export default function testPostHandler(request, response) {
   server.testController.testRule(body.rule, body.options)
     .then(function (consoleOutput) {
       response.send(consoleOutput);
+      //response.send(consoleOutput);
     })
     .catch(function (consoleOutput) {
       response.status(500).send(consoleOutput);

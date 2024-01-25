@@ -5,7 +5,7 @@ query_string: "*"
 # Alert on each event: Any, Blacklist, Whitelist, Change, Frequency, Spike, Flatline, NewTerm, Cardinality,...
 type: flatline
 threshold: 1
-timeframe: 
+timeframe:
   minutes: 60
 # use_count_query: true
 
@@ -37,9 +37,9 @@ alert_text: |-
   - Link: https://192.168.68.139/kibana/app/r/s/QDywq
 
 ms_teams_theme_color: "#6600ff"
-ms_teams_webhook_url: "https://galaxy1vn.webhook.office.com/webhookb2/9e9c2325-c219-4bf4-8d5a-40a28609300d@edd57295-3353-4a31-a447-2e9296fab693/IncomingWebhook/70b76cb3a58040618e1434d64cef3dcc/5ff7e4d0-0480-4553-8a1c-6e07ab063205"
+ms_teams_webhook_url: ""
 
-# Enhancement for converting 'detections' array into object, ex. get merged detection type by  
-# 'detections_parsed.type' or get first detection type by 'detection_parsed.0.type' 
-# match_enhancements:   
-# - "elastalert_modules.<>"   
+# Enhancement for converting 'detections' array into object, ex. get merged detection type by
+# 'detections_parsed.type' or get first detection type by 'detection_parsed.0.type'
+# match_enhancements:
+# - "elastalert_modules.<>"
