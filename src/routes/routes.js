@@ -1,5 +1,6 @@
 import indexHandler from '../handlers';
 import statusHandler from '../handlers/status';
+import statusRulesHandler from '../handlers/rules_status'; //canhvp
 import errorsHandler from '../handlers/status/errors';
 import rulesHandler from '../handlers/rules';
 import ruleGetHandler from '../handlers/rules/id/get';
@@ -49,6 +50,10 @@ let routes = [
     path: 'status',
     method: 'GET',
     handler: statusHandler
+  },{
+    path: 'status/:id*', //canhvp
+    method: 'GET',
+    handler: statusRulesHandler
   }, {
     path: 'status/errors',
     method: 'GET',

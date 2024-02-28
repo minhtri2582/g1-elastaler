@@ -5,7 +5,6 @@ import readdirp from 'readdirp';
 
 export default class FileSystem {
   constructor() { }
-
   readDirectoryRecursive(path) {
     return new Promise(function (resolve, reject) {
       try {        
@@ -155,3 +154,4 @@ export default class FileSystem {
     });
   }
 }
+

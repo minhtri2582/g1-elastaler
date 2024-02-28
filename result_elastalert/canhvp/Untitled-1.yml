@@ -1,0 +1,51 @@
+curl --location '54.255.9.139:3030/test' \
+--header 'Content-Type: application/json' \
+--data-raw '{"rule": "# (Required)\n# Rule name, must be unique\nname: Detect Fuzzing Extension\n\n# (Required)\n# Type of alert.\n# the frequency rule type alerts when num_events events occur with timeframe time\ntype: frequency\n\n# (Required)\n# Index to search, wildcard supported\nindex: g1-hq-aws-waf-*\n\n# (Required, frequency specific)\n# Alert when this many documents matching the query occur within a timeframe\nnum_events: 10\n\nrealert:\n  seconds: 0\n\n# (Required, frequency specific)\n# num_events must occur within this amount of time to trigger an alert\n\ntimeframe:\n  hours: 128\n\n# (Required)\n# A list of Elasticsearch filters used for find events\n# These filters are joined with AND and nested in a filtered query\n# For more info: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html\nfilter:\n- query:\n    query_string:\n      query: \"event.action : BLOCK and labels.name: *RestrictedExtensions*\"\n\n\n# Enhancement for converting '\''detections'\'' array into object, ex. get merged detection type by\n# '\''detections_parsed.type'\'' or get first detection type by '\''detection_parsed.0.type'\''\n#match_enhancements:\n#- \"elastalert_modules.bitsensor_enhancement.AlertTextEnhancement\"\n#run_enhancements_first: true\n\n\nalert_subject: \"[G1] Fuzzing Extension Detection on {}\"\nalert_subject_args:\n  - tags[0]\n\nalert_text_type: alert_text_only\nalert_text_args: [\"event.action\", \"@timestamp\"]\n\nalert_text: \"[Triggered]\\n\\nAttack type: Fuzzing Extention\\n\\n Event action: {}\\n\\nTime: {}\"\n\n# The alert is use when a match is found\nalert:\n  - debug\n  - ms_teams\nms_teams_theme_color: \"#6600ff\"\nms_teams_webhook_url: \"https://galaxy1vn.webhook.office.com/webhookb2/247e6a35-de0f-4e37-afa7-2dcb3ddb71c2@edd57295-3353-4a31-a447-2e9296fab693/IncomingWebhook/bf4d085c116742298456cb1d60c11a80/5ff7e4d0-0480-4553-8a1c-6e07ab063205\"", "options": {
+    "alert":true,
+    "format": "JSON",
+    "maxResults":1
+}}'
+
+curl --location '54.255.9.139:3030/test' \
+--header 'Content-Type: application/json' \
+--data-raw '{"rule": "", "options": {
+    "alert":true,
+    "format": "JSON",
+    "maxResults":1
+}}'
+
+curl --location '54.255.9.139:3030/test' \
+--header 'Content-Type: application/json' \
+--data-raw '{"rule": "# (Required)\n# Rule name, must be unique\nname: Detect Fuzzing Extension\n\n# (Required)\n# Type of alert.\n# the frequency rule type alerts when num_events events occur with timeframe time\ntype: frequency\n\n# (Required)\n# Index to search, wildcard supported\nindex: g1-hq-aws-wa1f-*\n\n# (Required, frequency specific)\n# Alert when this many documents matching the query occur within a timeframe\nnum_events: 10\n\nrealert:\n  seconds: 0\n\n# (Required, frequency specific)\n# num_events must occur within this amount of time to trigger an alert\n\ntimeframe:\n  hours: 128\n\n# (Required)\n# A list of Elasticsearch filters used for find events\n# These filters are joined with AND and nested in a filtered query\n# For more info: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html\nfilter:\n- query:\n    query_string:\n      query: \"event.action : BLOCK and labels.name: *RestrictedExtensions*\"\n\n\n# Enhancement for converting '\''detections'\'' array into object, ex. get merged detection type by\n# '\''detections_parsed.type'\'' or get first detection type by '\''detection_parsed.0.type'\''\n#match_enhancements:\n#- \"elastalert_modules.bitsensor_enhancement.AlertTextEnhancement\"\n#run_enhancements_first: true\n\n\nalert_subject: \"[G1] Fuzzing Extension Detection on {}\"\nalert_subject_args:\n  - tags[0]\n\nalert_text_type: alert_text_only\nalert_text_args: [\"event.action\", \"@timestamp\"]\n\nalert_text: \"[Triggered]\\n\\nAttack type: Fuzzing Extention\\n\\n Event action: {}\\n\\nTime: {}\"\n\n# The alert is use when a match is found\nalert:\n  - debug\n  - ms_teams\nms_teams_theme_color: \"#6600ff\"\nms_teams_webhook_url: \"https://galaxy1vn.webhook.office.com/webhookb2/247e6a35-de0f-4e37-afa7-2dcb3ddb71c2@edd57295-3353-4a31-a447-2e9296fab693/IncomingWebhook/bf4d085c116742298456cb1d60c11a80/5ff7e4d0-0480-4553-8a1c-6e07ab063205\"", "options": {
+    "alert":true,
+    "format": "JSON",
+    "maxResults":1
+}}'
+
+
+rule status (thống nhất field name sẽ để như hiện tại không thay đổi, 
+thay vào đó lấy filename 
+để lưu thành id và status theo filename):
+	- running - (querry) Ran [name] from (running timne)@timestamp ....
+			json field: :id, status =  running, last_running
+			example log: "Ran Sovico Credentials Breach Detected from 2024-01-16 05:13 UTC to 2024-01-16 06:13 UTC: 0 query hits (0 already seen), 6 matches, 6 alerts sent" số matches và số alerts sent có thể thay đổi nên không xử lí giá trị của 2 số này
+	- error - json field: :id, status =  error, last_running 
+	(lấy từ file json theo :id, nếu file không tồn tại -> null)
+			xử lí chỉ 1 rule error các rule khác vẫn chạy bình thường, 
+			báo status error theo :id thời gian chạy lần cuối có thể có 
+			(theo thời gian trước đó đã xuất ra file) hoặc null
+-------------------------------------
+test rule (option "alert":true): 
+	- trường hợp error: edit chỉnh về trạng thái khác 200
+	- trường hợp test ok có data để matches: status 200 
+			dữ liệu mẫu trả về: elastalert_status - {'rule_name': 'Detect Fuzzing Extension', 'endtime': datetime.datetime(2024, 1, 17, 9, 30, 34, 471626, tzinfo=tzutc()), 'starttime': datetime.datetime(2024, 1, 16, 9, 30, 34, 471626, tzinfo=tzutc()), 'matches': 176, 'hits': 1767, '@timestamp': datetime.datetime(2024, 1, 17, 9, 35, 26, 690233, tzinfo=tzutc()), 'time_taken': 291.7198541164398}
+	- trường hợp test ok nhưng body trả về "Didn't get any results." 
+	khi dùng option "alert":true vẫn có dữ liệu mẫu giống trường hợp trên 
+	nên vẫn xử lí dữ liệu mẫu trả về tương tự.
+			ví dụ cho trường hợp này: elastalert_status - {'rule_name': 'Detect Fuzzing Extension', 'endtime': datetime.datetime(2024, 1, 17, 14, 45, 32, 878607, tzinfo=tzutc()), 'starttime': datetime.datetime(2024, 1, 16, 14, 45, 32, 878607, tzinfo=tzutc()), 'matches': 0, 'hits': 0, '@timestamp': datetime.datetime(2024, 1, 17, 14, 45, 49, 176428, tzinfo=tzutc()), 'time_taken': 16.101480722427368}
+
+
+
+
+
+

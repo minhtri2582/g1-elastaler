@@ -63,6 +63,9 @@ services:
             source: ./rules
             target: /opt/elastalert/rules
           - type: bind
+            source: ./result_elastalert
+            target: /opt/elastalert/result_elastalert
+          - type: bind
             source: ./elastalert_modules
             target: /opt/elastalert/elastalert_modules
           - type: bind
@@ -71,6 +74,13 @@ services:
           - type: bind
             source: ./src
             target: /opt/elastalert-server/src
+          ## edit python to custom elastalert
+          - type: bind
+            source: ./result_elastalert/elastalert.py
+            target: /opt/elastalert/elastalert/elastalert.py
+          - type: bind
+            source: ./result_elastalert/loaders.py
+            target: /opt/elastalert/elastalert/loaders.py
 networks:
     elastic-net:
         driver: bridge

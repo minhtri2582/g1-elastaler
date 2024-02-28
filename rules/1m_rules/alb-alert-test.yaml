@@ -1,0 +1,48 @@
+
+name: "canhvp"
+query_string: "*"
+
+# Alert on each event: Any, Blacklist, Whitelist, Change, Frequency, Spike, Flatline, NewTerm, Cardinality,...
+type: flatline
+threshold: 1
+timeframe:
+  minutes: 60
+# use_count_query: true
+
+# A list of elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+filter:
+- query:
+    query_string:
+      query: $query_string$
+
+index: g1-hq-aws-alb-*
+
+# When the attacker continues, send a new alert after x minutes
+realert:
+  minutes: 100
+
+# Specify your services here
+alert:
+  - debug
+  - ms_teams
+  - "elastalert_modules.my_alerts.AwesomeNewAlerter"
+  
+output_file_path: "./result_elastalert/canhvp.json"
+  # - thehive
+
+# Alert body only cointains a title and text
+alert_text_type: alert_text_only
+alert_subject: "Missing log on g1-hq-aws-alb"
+
+alert_text: |-
+  - Link: https://192.168.68.139/kibana/app/r/s/QDywq
+
+ms_teams_theme_color: "#6600ff"
+ms_teams_webhook_url: ""
+
+# Enhancement for converting 'detections' array into object, ex. get merged detection type by
+# 'detections_parsed.type' or get first detection type by 'detection_parsed.0.type'
+# match_enhancements:
+# - "elastalert_modules.<>"

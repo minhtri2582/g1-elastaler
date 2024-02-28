@@ -1,0 +1,20 @@
+2024-02-27 10:59:27,963 - DEBUG - {'_scroll_id': 'FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAA==', 'took': 0, 'timed_out': False, '_shards': {'total': 0, 'successful': 0, 'skipped': 0, 'failed': 0}, 'hits': {'total': {'value': 0, 'relation': 'eq'}, 'max_score': 0.0, 'hits': []}}
+2024-02-27 10:59:27,963 - INFO - Queried rule canhvp from 2024-02-27 10:58 UTC to 2024-02-27 10:59 UTC: 0 / 0 hits
+2024-02-27 10:59:27,966 - DEBUG - {'_scroll_id': 'FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAA==', 'took': 0, 'timed_out': False, '_shards': {'total': 0, 'successful': 0, 'skipped': 0, 'failed': 0}, 'hits': {'total': {'value': 0, 'relation': 'eq'}, 'max_score': 0.0, 'hits': []}}
+2024-02-27 10:59:27,967 - INFO - Queried rule canhvp from 2024-02-27 10:59 UTC to 2024-02-27 10:59 UTC: 0 / 0 hits
+2024-02-27 10:59:27,970 - INFO - Ignoring match for silenced rule canhvp.all
+2024-02-27 10:59:27,973 - INFO - Ignoring match for silenced rule canhvp.all
+2024-02-27 10:59:27,982 - INFO - Ran canhvp from 2024-02-27 10:58 UTC to 2024-02-27 10:59 UTC: 0 query hits (0 already seen), 2 matches, 0 alerts sent
+2024-02-27 10:59:27,983 - INFO - canhvp range 63
+2024-02-27 11:00:00,813 - DEBUG - {'_scroll_id': 'FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAA==', 'took': 0, 'timed_out': False, '_shards': {'total': 0, 'successful': 0, 'skipped': 0, 'failed': 0}, 'hits': {'total': {'value': 0, 'relation': 'eq'}, 'max_score': 0.0, 'hits': []}}
+2024-02-27 11:00:00,813 - INFO - Queried rule canhvp2 from 2024-02-27 10:58 UTC to 2024-02-27 10:59 UTC: 0 / 0 hits
+2024-02-27 11:00:00,819 - DEBUG - {'_scroll_id': 'FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAA==', 'took': 0, 'timed_out': False, '_shards': {'total': 0, 'successful': 0, 'skipped': 0, 'failed': 0}, 'hits': {'total': {'value': 0, 'relation': 'eq'}, 'max_score': 0.0, 'hits': []}}
+2024-02-27 11:00:00,819 - INFO - Queried rule canhvp2 from 2024-02-27 10:59 UTC to 2024-02-27 11:00 UTC: 0 / 0 hits
+2024-02-27 11:00:00,826 - INFO - Ignoring match for silenced rule canhvp2.all
+2024-02-27 11:00:00,829 - INFO - Ignoring match for silenced rule canhvp2.all
+2024-02-27 11:00:00,837 - INFO - Ran canhvp2 from 2024-02-27 10:58 UTC to 2024-02-27 11:00 UTC: 0 query hits (0 already seen), 2 matches, 0 alerts sent
+2024-02-27 11:00:00,837 - INFO - canhvp2 range 63
+2024-02-27 11:00:11,565 - INFO - Background configuration change check run at 2024-02-27 11:00 UTC
+2024-02-27 11:00:11,566 - INFO - Background alerts thread 0 pending alerts sent at 2024-02-27 11:00 UTC
+2024-02-27 11:00:11,596 - INFO - Disabled rules are: []
+2024-02-27 11:00:11,596 - INFO - Sleeping for 59.999732 seconds

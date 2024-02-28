@@ -1,0 +1,257 @@
+2024-02-27 10:59:12,011 - ERROR - Error running query: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+2024-02-27 10:59:12,020 - ERROR - Error writing alert info to Elasticsearch: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 161, in perform_request
+    response = self.session.send(prepared_request, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 458, in send
+    self.cert_verify(conn, request.url, verify, cert)
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 261, in cert_verify
+    raise OSError(
+OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/elastalert/elastalert/elastalert.py", line 379, in get_hits
+    res = self.thread_data.current_es.search(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/elastalert/elastalert/__init__.py", line 147, in search
+    results = self.transport.perform_request(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 390, in perform_request
+    raise e
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 358, in perform_request
+    status, headers_response, data = connection.perform_request(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 177, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 161, in perform_request
+    response = self.session.send(prepared_request, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 458, in send
+    self.cert_verify(conn, request.url, verify, cert)
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 261, in cert_verify
+    raise OSError(
+OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/elastalert/elastalert/elastalert.py", line 1480, in writeback
+    res = self.writeback_es.index(index=index, body=body)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/__init__.py", line 398, in index
+    return self.transport.perform_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 390, in perform_request
+    raise e
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 358, in perform_request
+    status, headers_response, data = connection.perform_request(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 177, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+2024-02-27 10:59:12,022 - INFO - Ran ftest from 2024-02-27 10:58 UTC to 2024-02-27 10:59 UTC: 0 query hits (0 already seen), 0 matches, 0 alerts sent
+2024-02-27 10:59:12,022 - INFO - ftest range 60
+2024-02-27 10:59:18,636 - ERROR - Error running query: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+2024-02-27 10:59:18,644 - ERROR - Error writing alert info to Elasticsearch: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 161, in perform_request
+    response = self.session.send(prepared_request, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 458, in send
+    self.cert_verify(conn, request.url, verify, cert)
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 261, in cert_verify
+    raise OSError(
+OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/elastalert/elastalert/elastalert.py", line 379, in get_hits
+    res = self.thread_data.current_es.search(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/elastalert/elastalert/__init__.py", line 147, in search
+    results = self.transport.perform_request(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 390, in perform_request
+    raise e
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 358, in perform_request
+    status, headers_response, data = connection.perform_request(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 177, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 161, in perform_request
+    response = self.session.send(prepared_request, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 458, in send
+    self.cert_verify(conn, request.url, verify, cert)
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 261, in cert_verify
+    raise OSError(
+OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/elastalert/elastalert/elastalert.py", line 1480, in writeback
+    res = self.writeback_es.index(index=index, body=body)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/__init__.py", line 398, in index
+    return self.transport.perform_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 390, in perform_request
+    raise e
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 358, in perform_request
+    status, headers_response, data = connection.perform_request(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 177, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+2024-02-27 10:59:18,645 - INFO - Ran demo from 2024-02-27 10:58 UTC to 2024-02-27 10:59 UTC: 0 query hits (0 already seen), 0 matches, 0 alerts sent
+2024-02-27 10:59:18,646 - INFO - demo range 60
+2024-02-27 10:59:47,008 - ERROR - Error running query: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+2024-02-27 10:59:47,016 - ERROR - Error writing alert info to Elasticsearch: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 161, in perform_request
+    response = self.session.send(prepared_request, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 458, in send
+    self.cert_verify(conn, request.url, verify, cert)
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 261, in cert_verify
+    raise OSError(
+OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/elastalert/elastalert/elastalert.py", line 379, in get_hits
+    res = self.thread_data.current_es.search(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/elastalert/elastalert/__init__.py", line 147, in search
+    results = self.transport.perform_request(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 390, in perform_request
+    raise e
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 358, in perform_request
+    status, headers_response, data = connection.perform_request(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 177, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 161, in perform_request
+    response = self.session.send(prepared_request, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 458, in send
+    self.cert_verify(conn, request.url, verify, cert)
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 261, in cert_verify
+    raise OSError(
+OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/elastalert/elastalert/elastalert.py", line 1480, in writeback
+    res = self.writeback_es.index(index=index, body=body)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/__init__.py", line 398, in index
+    return self.transport.perform_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 390, in perform_request
+    raise e
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 358, in perform_request
+    status, headers_response, data = connection.perform_request(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 177, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+2024-02-27 10:59:47,018 - INFO - Ran tructt1111 from 2024-02-27 10:58 UTC to 2024-02-27 10:59 UTC: 0 query hits (0 already seen), 0 matches, 0 alerts sent
+2024-02-27 10:59:47,018 - INFO - tructt1111 range 60
+2024-02-27 11:00:11,804 - ERROR - Error finding recent pending alerts: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) {'query': {'bool': {'must': {'query_string': {'query': '!_exists_:aggregate_id AND alert_sent:false'}}, 'filter': {'range': {'alert_time': {'from': '2024-02-25T11:00:11.800359Z', 'to': '2024-02-27T11:00:11.800383Z'}}}}}, 'sort': {'alert_time': {'order': 'asc'}}}
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 161, in perform_request
+    response = self.session.send(prepared_request, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 458, in send
+    self.cert_verify(conn, request.url, verify, cert)
+  File "/home/node/.local/lib/python3.11/site-packages/requests/adapters.py", line 261, in cert_verify
+    raise OSError(
+OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/elastalert/elastalert/elastalert.py", line 1499, in find_recent_pending_alerts
+    res = self.writeback_es.search(index=self.writeback_index, body=query, size=1000)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/client/utils.py", line 152, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/elastalert/elastalert/__init__.py", line 147, in search
+    results = self.transport.perform_request(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 390, in perform_request
+    raise e
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/transport.py", line 358, in perform_request
+    status, headers_response, data = connection.perform_request(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/elasticsearch/connection/http_requests.py", line 177, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt) caused by: OSError(Could not find a suitable TLS CA certificate bundle, invalid path: /opt/elastalert/certs/ca.crt)
+2024-02-27 11:00:11,806 - INFO - Background configuration change check run at 2024-02-27 11:00 UTC
+2024-02-27 11:00:11,806 - INFO - Background alerts thread 0 pending alerts sent at 2024-02-27 11:00 UTC
+2024-02-27 11:00:11,839 - INFO - Disabled rules are: []
+2024-02-27 11:00:11,840 - INFO - Sleeping for 59.999717 seconds

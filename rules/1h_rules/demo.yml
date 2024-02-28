@@ -1,5 +1,5 @@
 # Index to search, wildcard supported
-name: "[g1-soc] Missing log from log-source id: g1-hq-aws-cloudtrail"
+name: "demo"
 query_string: "*"
 
 # Alert on each event: Any, Blacklist, Whitelist, Change, Frequency, Spike, Flatline, NewTerm, Cardinality,...
@@ -17,21 +17,23 @@ filter:
     query_string:
       query: $query_string$
 
-index: g1-hq-aws-cloudtrail-*
+index: g1-hq-aws-alb-*
 
 # When the attacker continues, send a new alert after x minutes
 realert:
-  minutes: 5
+  minutes: 100
 
 # Specify your services here
 alert:
   - debug
   - ms_teams
+  - "elastalert_modules.my_alerts.AwesomeNewAlerter"
+output_file_path: "/opt/elastalert/result_elastalert/alerts.log"
   # - thehive
 
 # Alert body only cointains a title and text
 alert_text_type: alert_text_only
-alert_subject: "Missing log on g1-hq-aws-cloudtrail"
+alert_subject: "Missing log on g1-hq-aws-alb"
 
 alert_text: |-
   - Link: https://192.168.68.139/kibana/app/r/s/QDywq
